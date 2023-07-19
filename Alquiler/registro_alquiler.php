@@ -2,9 +2,8 @@
 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css">
 <script type="text/javascript" charset="utf8" src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
+<script src="validar_Dni.js"></script>
 
 <style>
     .container {
@@ -50,42 +49,36 @@
                 <input class="form-control" id="validar" type="text" placeholder="Ingrese el Dni del cliente">
                 <br>
                 <div class="text-center">
-                    <button class="btn btn-primary">Verificar DNI</button>
+                    <button id="buttonDni" class="btn btn-primary" onclick="ValidarDni()">Verificar DNI</button>
                 </div>
 
 
-                <form action="guardar_cliente.php" method="POST">
-                    <div class="form-group">
-                        <label for="nombreCliente">Nombre:</label>
-                        <input type="text" class="form-control" name="Nombre_Cliente"
-                            placeholder="Ingrese el nombre del Cliente" required readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="apellidoCliente">Apellido:</label>
-                        <input type="text" class="form-control" name="Apellido_Cliente"
-                            placeholder="Ingrese el apellido del Cliente" required readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="telefonoCliente">Telefono:</label>
-                        <input type="text" class="form-control" name="Telefono_Cliente"
-                            placeholder="Ingrese el telefono del Cliente" required readonly>
-                    </div>
-                    <div class="form-group">
-                        <label for="direccionCliente">Direccion:</label>
-                        <input type="text" class="form-control" name="Direccion_Cliente"
-                            placeholder="Ingrese la direccion del Cliente" required readonly>
-                    </div>
-                    <div class="form-group">
-                        <input type="hidden" class="form-control" name="Dni_Cliente" required readonly >
-                    </div>
+                <div class="form-group">
+                    <label for="nombreCliente">Nombre:</label>
+                    <input id="name" type="text" class="form-control" name="Nombre_Cliente"
+                        placeholder="Ingrese el nombre del Cliente" required readonly>
+                </div>
+                <div class="form-group">
+                    <label for="apellidoCliente">Apellido:</label>
+                    <input id="ape" type="text" class="form-control" name="Apellido_Cliente"
+                        placeholder="Ingrese el apellido del Cliente" required readonly>
+                </div>
+                <div class="form-group">
+                    <label for="telefonoCliente">Telefono:</label>
+                    <input id="celu" type="text" class="form-control" name="Telefono_Cliente"
+                        placeholder="Ingrese el telefono del Cliente" required readonly>
+                </div>
+                <div class="form-group">
+                    <label for="direccionCliente">Direccion:</label>
+                    <input id="dire" type="text" class="form-control" name="Direccion_Cliente"
+                        placeholder="Ingrese la direccion del Cliente" required readonly>
+                </div>
 
-                    <div class="text-center">
-                        <a href="../alquiler.php" class="btn btn-danger"><span
-                                class="glyphicon glyphicon-chevron-left"></span> Cancelar</a>
-                        <button type="submit" class="btn btn-primary">Guardar</button>
-                    </div>
-
-                </form>
+                <div class="text-center">
+                    <a href="../alquiler.php" class="btn btn-danger"><span
+                            class="glyphicon glyphicon-chevron-left"></span> Cancelar</a>
+                    <button onclick="guardarCliente()" class="btn btn-primary">Guardar</button>
+                </div>
             </div>
         </div>
     </div>
