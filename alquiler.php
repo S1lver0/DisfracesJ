@@ -241,30 +241,35 @@
     </div>
     <h1 class="text-center">VER DETALLES</h1>
     <h3 id="nombreD" class="text-center">--</h3>
+    <h3 id="precioD" class="text-center">S/.</h3>
     <div style="display:flex;justify-content:center">
-      <table class="table table-dark" style="background-color:thistle; width:600px">
+      <table id="tablax" class="table table-dark" style="background-color:thistle; width:600px">
         <thead>
           <tr>
             <th scope="col">Tallas</th>
             <th scope="col">Cantidad</th>
             <th scope="col">Accion</th>
+            <th scope="col" style="display:none">extra</th>
           </tr>
         </thead>
         <tbody>
           <tr>
             <th scope="row">S</th>
-            <td>---</td>
-            <td><a class="btn btn-warning btn-sm boton-comprar glyphicon glyphicon-usd"><span></span></a></td>
+            <td id="cantidadS">---</td>
+            <td><a class="ele btn btn-warning btn-sm boton-comprar glyphicon glyphicon-usd"><span></span></a></td>
+            <td id="idS" style="display:none"></td>
           </tr>
           <tr>
             <th scope="row">M</th>
-            <td>---</td>
-            <td><a class="btn btn-warning btn-sm glyphicon glyphicon-usd"><span></span></a></td>
+            <td id="cantidadM">---</td>
+            <td><a class="ele btn btn-warning btn-sm glyphicon glyphicon-usd"><span></span></a></td>
+            <td id="idM" style="display:none"></td>
           </tr>
           <tr>
             <th scope="row">L</th>
-            <td>---</td>
-            <td><a class="btn btn-warning btn-sm glyphicon glyphicon-usd"><span></span></a></td>
+            <td id="cantidadL">---</td>
+            <td><a class="ele btn btn-warning btn-sm glyphicon glyphicon-usd"><span></span></a></td>
+            <td id="idL" style="display:none"></td>
           </tr>
         </tbody>
       </table>
@@ -276,6 +281,23 @@
         <h3>Carrito de Compras</h3>
         <ul class="cart-items">
           <!-- Los elementos del carrito se agregarán dinámicamente aquí -->
+          <li>Nombre del Producto</li>
+          <li>Precio: $50</li>
+          <li>Talla: M</li>
+          <li>Cantidad :</li>
+          <li>
+            <div class="quantity">
+  
+              <button onclick="decreaseQuantity(0)" class="btn btn-primary">-</button>
+              <input type="text" id="quantity-0" value="1" class="form-control">
+              <button onclick="increaseQuantity(0)" class="btn btn-primary">+</button>
+            </div>
+          </li>
+          <li>------------------</li>
+          <li>Nombre del Producto</li>
+          <li>Precio: $50</li>
+          <li>Talla: M</li>
+          <li>------------------</li>
         </ul>
         <div class="cart-footer">
           <button class="clear-cart">Vaciar Carrito</button>
@@ -403,5 +425,9 @@
     display: inline-block;
     font-size: 16px;
     cursor: pointer;
+  }
+  .quantity {
+    display: flex;
+    align-items: center;
   }
 </style>
