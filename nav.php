@@ -49,7 +49,7 @@
       <ul class="nav navbar-nav navbar-right">
         <li><a href="./">INICIO </a></li>
         <li><a href="index.php">DISFRAZ</a></li>
-        <li><a href="alquiler.php">ALQUILER</a></li>
+        <li><a href="menuAlquiler.php">ALQUILER</a></li>
         <li><a href="./">CLIENTES</a></li>
       </ul>
     </div>

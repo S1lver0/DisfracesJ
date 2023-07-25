@@ -5,6 +5,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
   <title>Document</title>
 </head>
 
@@ -14,7 +15,7 @@
   include("nav.php");
   ?>
   <div class="table-container">
-    <h1 class="page-header text-center">Lista de Alquiler</h1>
+    <h1 class="page-header text-center">Lista de Disfraces para Alquilar</h1>
 
     <div class="row table table-dark">
       <style>
@@ -27,12 +28,7 @@
       </style>
 
       <div class="col-sm-10 col-sm-offset">
-        <a href="Alquiler/registro_alquiler.php" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>
-          Registrar
-          Nuevo
-          Alquiler</a>
-        <p></p>
-
+      
         <!-- Formulario de búsqueda -->
 
         <div class="row">
@@ -256,19 +252,22 @@
           <tr>
             <th scope="row">S</th>
             <td id="cantidadS">---</td>
-            <td><a class="ele btn btn-warning btn-sm boton-comprar glyphicon glyphicon-usd"><span></span></a></td>
+            <td><a id="botonS" class="ele btn btn-warning btn-sm boton-comprar glyphicon glyphicon-usd "
+                style="display:none"><span></span></a></td>
             <td id="idS" style="display:none"></td>
           </tr>
           <tr>
             <th scope="row">M</th>
             <td id="cantidadM">---</td>
-            <td><a class="ele btn btn-warning btn-sm glyphicon glyphicon-usd"><span></span></a></td>
+            <td><a id="botonM" class="ele btn btn-warning btn-sm glyphicon glyphicon-usd"
+                style="display:none"><span></span></a></td>
             <td id="idM" style="display:none"></td>
           </tr>
           <tr>
             <th scope="row">L</th>
             <td id="cantidadL">---</td>
-            <td><a class="ele btn btn-warning btn-sm glyphicon glyphicon-usd"><span></span></a></td>
+            <td><a id="botonL" class="ele btn btn-warning btn-sm glyphicon glyphicon-usd"
+                style="display:none"><span></span></a></td>
             <td id="idL" style="display:none"></td>
           </tr>
         </tbody>
@@ -279,28 +278,12 @@
     <div class="cart-sidebar">
       <div class="cart-content">
         <h3>Carrito de Compras</h3>
-        <ul class="cart-items">
-          <!-- Los elementos del carrito se agregarán dinámicamente aquí -->
-          <li>Nombre del Producto</li>
-          <li>Precio: $50</li>
-          <li>Talla: M</li>
-          <li>Cantidad :</li>
-          <li>
-            <div class="quantity">
-  
-              <button onclick="decreaseQuantity(0)" class="btn btn-primary">-</button>
-              <input type="text" id="quantity-0" value="1" class="form-control">
-              <button onclick="increaseQuantity(0)" class="btn btn-primary">+</button>
-            </div>
-          </li>
-          <li>------------------</li>
-          <li>Nombre del Producto</li>
-          <li>Precio: $50</li>
-          <li>Talla: M</li>
-          <li>------------------</li>
+        <ul class="cart-items" id="compras">
+
         </ul>
         <div class="cart-footer">
-          <button class="clear-cart">Vaciar Carrito</button>
+          <button class="btn btn-danger" onclick="vaciarCarro()">Vaciar Carrito</button>
+          <button class="btn btn-success" onclick="enviarJson()">Confirmar</button>
         </div>
       </div>
     </div>
@@ -426,6 +409,7 @@
     font-size: 16px;
     cursor: pointer;
   }
+
   .quantity {
     display: flex;
     align-items: center;

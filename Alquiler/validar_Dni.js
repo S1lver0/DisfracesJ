@@ -81,6 +81,10 @@ function guardarCliente() {
             title: "Se registro correctamente el cliente",
             text: "Se procedera a elegir los disfraces a alquilar",
           });
+          //cuidado
+          window.location.href = "http://localhost/Cliente/alquiler.php?"+cliente.dni;
+          //
+
         }else{
           Swal.fire({
             icon: "error",
