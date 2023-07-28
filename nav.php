@@ -47,10 +47,8 @@
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="./">INICIO </a></li>
         <li><a href="index.php">DISFRAZ</a></li>
         <li><a href="menuAlquiler.php">ALQUILER</a></li>
-        <li><a href="./">CLIENTES</a></li>
       </ul>
     </div>
   </div>

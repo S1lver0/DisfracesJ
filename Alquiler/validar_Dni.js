@@ -17,6 +17,8 @@ function ValidarDni() {
           title: "Cliente Reconocido",
           text: "Se procedera a hacer el alquiler",
         });
+        //cuidado
+        window.location.href = "http://localhost/Cliente/alquiler.php?"+dni;
       } else {
         if (data == ".false") {
           Swal.fire({

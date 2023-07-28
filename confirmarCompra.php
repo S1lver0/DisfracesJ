@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.0.20/dist/sweetalert2.all.min.js"></script>
 </head>
 
 
@@ -114,35 +115,59 @@
 
 
     function enviar() {
+        var dates = document.getElementById("dias").value
+        console.log(dates);
+        if (dates > 0 && dates != "") {
+            var tot = acumulador * dates;
+            // Datos que se enviarán en el cuerpo de la solicitud
+            const data = {
+                json: jsonArray,
+                id: parametro,
+                dias: dates,
+                precio: tot
+            };
 
-        // Datos que se enviarán en el cuerpo de la solicitud
-        const data = {
-            json: jsonArray,
-            id: parametro
-        };
+            // URL del archivo PHP al que quieres enviar los datos
+            const url = "Alquiler/updateTable.php";
 
-        // URL del archivo PHP al que quieres enviar los datos
-        const url = "Alquiler/updateTable.php";
+            // Configuración del objeto fetch
+            const options = {
+                method: "POST", // Método POST para enviar datos en el cuerpo de la solicitud
+                headers: {
+                    "Content-Type": "application/json" // Tipo de contenido del cuerpo de la solicitud
+                },
+                body: JSON.stringify(data) // Convertir el objeto en formato JSON para enviarlo en el cuerpo
+            };
 
-        // Configuración del objeto fetch
-        const options = {
-            method: "POST", // Método POST para enviar datos en el cuerpo de la solicitud
-            headers: {
-                "Content-Type": "application/json" // Tipo de contenido del cuerpo de la solicitud
-            },
-            body: JSON.stringify(data) // Convertir el objeto en formato JSON para enviarlo en el cuerpo
-        };
+            // Realizar la solicitud mediante fetch
+            fetch(url, options)
+                .then(response => response.text()) // Parsear la respuesta JSON
+                .then(data => {
+                    // Hacer algo con la respuesta del servidor
+                    console.log(data);
+                    Swal.fire({
+                        icon: "success",
+                        title: "Alquiler Generado",
+                        text: "Alquiler Generado",
+                    });
+                    //cuidado
+                    setTimeout(function(){
+                        window.location.href = "http://localhost/Cliente/menuAlquiler.php";
+                    },3500);
 
-        // Realizar la solicitud mediante fetch
-        fetch(url, options)
-            .then(response => response.json()) // Parsear la respuesta JSON
-            .then(data => {
-                // Hacer algo con la respuesta del servidor
-                console.log(data);
-            })
-            .catch(error => {
-                console.error("Error en la solicitud:", error);
+                })
+                .catch(error => {
+                    console.error("Error en la solicitud:", error);
+                });
+
+        } else {
+            Swal.fire({
+                icon: "error",
+                title: "Ingrese cantidad valida de dias",
+                text: "",
             });
+
+        }
 
     }
 
