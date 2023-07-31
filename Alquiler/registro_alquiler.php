@@ -75,7 +75,7 @@
                 </div>
 
                 <div class="text-center">
-                    <a href="../alquiler.php" class="btn btn-danger"><span
+                    <a href="../menuAlquiler.php" class="btn btn-danger"><span
                             class="glyphicon glyphicon-chevron-left"></span> Cancelar</a>
                     <button onclick="guardarCliente()" class="btn btn-primary">Guardar</button>
                 </div>

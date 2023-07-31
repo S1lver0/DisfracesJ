@@ -261,7 +261,7 @@
                               <!--  <a href="#delete_<?php echo $row['PK_Disfraz']; ?>" class="btn btn-danger btn-sm" data-toggle="modal"><span class="glyphicon glyphicon-trash"></span></a>-->
                       <a href="editar_disfraz.php?id=<?php echo $row['PK_Disfraz']; ?>" class="btn btn-success btn-sm" data-toggle="modal"><span class="glyphicon glyphicon-pencil"></span></a>
                       <a href="talla.php?id=<?php echo $row['PK_Disfraz']; ?>" class="btn btn-primary btn-sm" data-toggle="modal"><span class="glyphicon glyphicon-eye-open"></span></a>
-                      <a href="talla.php?id=<?php echo $row['PK_Disfraz']; ?>" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-usd"></span></a>
+                      <a href="tabla.php?id=<?php echo $row['PK_Disfraz']; ?>" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-usd"></span></a>
                     </td>
 
                     

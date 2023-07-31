@@ -52,6 +52,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $queryTallaL = "INSERT INTO DisfrazTalla (PK_DisfrazTalla, Dtal_Cantidad, FK_Talla_DIsfrazTalla, FK_Disfraz_DisfrazTalla) VALUES ('$tallaLID', '$cantidadL', '$tallaL', '$disfrazID')";
     $conex->query($queryTallaL);
 
+    /////DISFRAZ PRECIO
+    $PrecioT = uniqid();
+    $fechaHoy = date("Y-m-d");
+    $fechaFinal = "NULL";
+  
+
+    $queryPrecios = "INSERT INTO Disfrazprecios ( PK_DisfrazPrecios, FK_Disfraz_DisfrazPrecios, Dpre_Precio, Dpre_FechaInicio , Dpre_FechaFinal ) VALUES ('$PrecioT', '$disfrazID', '$precioDisfraz', '$fechaHoy' ,'$fechaFinal')";
+    $conex->query($queryPrecios);
+    ////////////
+
     // Cerrar las consultas y la conexión
     $conex->close();
 
@@ -68,6 +78,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } else {
         $_SESSION['message'] = 'Disfraz error';
     }
+
+    
 
 
 
