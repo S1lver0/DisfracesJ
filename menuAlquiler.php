@@ -5,6 +5,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.min.css">
+
+  <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
   <title>Document</title>
 </head>
 
@@ -39,9 +41,9 @@
           <div class="col-md-4">
             <!-- Primera Columna -->
             <div class="input-group mb-2 justify-content-start">
-              <input type="text" class="form-control" name="buscar_nombre" placeholder="Buscar por DNI" />
+              <input type="text" class="form-control" name="buscar_nombre" placeholder="Buscar por DNI" id="buscador"/>
               <span class="input-group-btn">
-                <button class="btn btn-primary">
+                <button class="btn btn-primary" onclick="filtrarTabla()" >
                   Buscar
                 </button>
               </span>
@@ -68,11 +70,11 @@
               }
             </style>
 
-            <select id="tematicaSelect" class="form-control form-control-lg mb-3 custom-select"
+            <select id="filtroSelect" class="form-control form-control-lg mb-3 custom-select"
               aria-label="Default select example">
-              <option selected>Seleccionar Estado</option>
-              <option value="1">Activo</option>
-              <option value="2">No Activo</option>
+              <option value="todos">Todos</option>
+              <option value="Activo">Activo</option>
+              <option value="Vencido">Vencido</option>
             </select>
 
             <!-- Segunda FIN -->
@@ -85,7 +87,6 @@
               <thead>
                 <tr>
                   <th style="display:none" scope="col" id="idFicha">Id</th>
-                  <th scope="col">N°</th>
                   <th scope="col">DNI</th>
                   <th scope="col">Fecha_Ini</th>
                   <th scope="col">Fecha_Dev</th>
@@ -94,50 +95,7 @@
                   <th scope="col">Acciones</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Mark</td>
-                  <td>Otto</td>
-                  <td>@mdo</td>
-                </tr>
-                
+              <tbody id="tablitaAlquiler">
               </tbody>
             </table>
           </div>
