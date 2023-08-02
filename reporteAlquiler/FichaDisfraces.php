@@ -5,7 +5,7 @@ $data = json_decode(file_get_contents('php://input'), true);
 $idCliente = $data['cliente'];
 $idFicha = $data['ficha'];
 
-$sql = "SELECT * FROM FichaDetalle JOIN DisfrazTalla ON FichaDetalle.FK_DisfrazTalla_FichaDetalle = DisfrazTalla.PK_DisfrazTalla WHERE FK_Ficha_FichaDetalle = '$idFicha'";
+$sql = "SELECT * FROM FichaDetalle JOIN DisfrazTalla ON FichaDetalle.FK_DisfrazTalla_FichaDetalle = DisfrazTalla.PK_DisfrazTalla JOIN Disfraz ON DisfrazTalla.FK_Disfraz_DisfrazTalla = Disfraz.PK_Disfraz WHERE FK_Ficha_FichaDetalle = '$idFicha'";
 
 $resultado = $conex->query($sql);
 

@@ -150,13 +150,14 @@
               <th>Cantidad</th>
               <th>Precio Unitario</th>
               <th>Talla</th>
-              <th>Precio Total</th>
             </tr>
           </thead>
           <tbody id="tablaDetalle">
             <!-- Aquí se llenará dinámicamente con datos -->
           </tbody>
         </table>
+        <br>
+        <p><strong>PRECIO TOTAL :</strong> <span id="precioTotal"></span></p>
       </div>
     </div>
   </div>

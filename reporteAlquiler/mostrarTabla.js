@@ -156,7 +156,11 @@ function mostrarDetalles(event) {
 
   // Obtén los datos relevantes que deseas mostrar (por ejemplo, el ID y el Nombre)
   const id = fila.querySelector("td:nth-child(7)").textContent;
+  const fechaIni = fila.querySelector("td:nth-child(2)").textContent;
+  const fechaDev = fila.querySelector("td:nth-child(3)").textContent;
+  const estate = fila.querySelector("td:nth-child(5)").textContent;
   const cliente = fila.querySelector("td:nth-child(1)").textContent;
+  const precioTotal = fila.querySelector("td:nth-child(4)").textContent;
   var idFicha = { ficha: id, cliente: cliente };
   console.log(idFicha);
 
@@ -178,7 +182,38 @@ function mostrarDetalles(event) {
           text: "intente nuevamente",
         });
       } else {
-        console.log(JSON.parse(data));
+        data = JSON.parse(data);
+        // Rellenar los datos en el modal
+        document.getElementById("nombre").textContent =
+          data.cliente.Clie_Nombre;
+        document.getElementById("apellido").textContent =
+          data.cliente.Clie_Apellido;
+        document.getElementById("dni").textContent = data.cliente.PK_Cliente;
+        document.getElementById("telefono").textContent =
+          data.cliente.Clie_Celular;
+        document.getElementById("direccion").textContent =
+          data.cliente.Clie_Domicilio;
+        document.getElementById("fechaEntrega").textContent = fechaIni;
+        document.getElementById("fechaDevolucion").textContent = fechaDev;
+        document.getElementById("estado").textContent = estate;
+        document.getElementById("precioTotal").textContent = precioTotal;
+
+        // Generar la tabla dinámicamente (puedes ajustar los datos según tus necesidades)
+        const tablaDetalle = document.getElementById("tablaDetalle");
+        tablaDetalle.innerHTML = "";
+
+        const datosTabla = data.disfraces;
+
+        datosTabla.forEach((producto) => {
+          tablaDetalle.innerHTML += `
+    <tr>
+      <td>${producto.Disf_Nombre}</td>
+      <td>${producto.Fdet_CantidadCompra}</td>
+      <td>${producto.Disf_Precio}</td>
+      <td>${producto.FK_Talla_DIsfrazTalla == "1" ? "S" :producto.FK_Talla_DIsfrazTalla == "2" ? "M" :producto.FK_Talla_DIsfrazTalla == "3" ? "L" : " " }</td>
+    </tr>
+  `;
+        });
         document.getElementById("myModal").style.display = "block";
       }
     })
