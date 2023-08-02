@@ -50,9 +50,9 @@ fetch("reporteAlquiler/obtenerLista.php", {
                   estado == "Activo"
                     ? "btn btn-success btn-sm glyphicon glyphicon-ok-circle"
                     : "btn btn-danger btn-sm glyphicon glyphicon-remove-circle"
-                }">${estado == "Activo"? "Activo": "Vencido"}</a></td>
+                }">${estado == "Activo" ? "Activo" : "Vencido"}</a></td>
                 <td><a class="btn btn-success btn-sm boton-comprar glyphicon glyphicon-plus"></a>
-                <a class="btn btn-primary btn-sm boton-comprar glyphicon glyphicon-eye-open"></a>
+                <a class="detalles btn btn-primary btn-sm boton-comprar glyphicon glyphicon-eye-open"></a>
                 <a class="btn btn-danger btn-sm boton-comprar glyphicon glyphicon-trash"></a></td>
                 <td style="display:none">${data[clave].PK_Ficha}</td>
             </tr>
@@ -60,6 +60,14 @@ fetch("reporteAlquiler/obtenerLista.php", {
           }
         }
       }
+
+      //////////////// eventos para ver detalles
+      const enlacesDetalles = document.querySelectorAll(".detalles");
+      console.log(enlacesDetalles);
+      // Agrega un evento clic a cada enlace
+      enlacesDetalles.forEach((enlace) => {
+        enlace.addEventListener("click", mostrarDetalles);
+      });
     }
   })
   .catch((error) => {
@@ -105,43 +113,81 @@ function filtrarTabla() {
   }
 }
 
-
-
-  function filtrarTablaEstado() {
-    const miTabla = document.getElementById("tablitaAlquiler");
-    const filtroSelect = document.getElementById("filtroSelect");
-    const valorSeleccionado = filtroSelect.value;
-    const filas = miTabla.getElementsByTagName("tr");
-  
-    // Recorrer todas las filas de la tabla (excepto la primera que es el encabezado)
-    for (let i = 0; i < filas.length; i++) {
-      const fila = filas[i];
-      const celdas = fila.getElementsByTagName("td");
-      let mostrarFila = true;
-  
-      // Obtener el valor de la celda que contiene el estado
-      const celda = celdas[4];
-      const enlace = celda.querySelector("a");
-      console.log(enlace.textContent);
-      if (enlace) {
-        const valorCelda = enlace.textContent || celda.innerText;
-        if (valorSeleccionado !== "todos" && valorCelda !== valorSeleccionado) {
-          mostrarFila = false;
-        }
-      }
-
-      if (mostrarFila) {
-        fila.style.display = "";
-      } else {
-        fila.style.display = "none";
-      }
-     }
-  }
-  
-  // Agregar un evento 'change' al select para detectar cambios en la selección
+function filtrarTablaEstado() {
+  const miTabla = document.getElementById("tablitaAlquiler");
   const filtroSelect = document.getElementById("filtroSelect");
-  filtroSelect.addEventListener("change", filtrarTablaEstado);
-  
+  const valorSeleccionado = filtroSelect.value;
+  const filas = miTabla.getElementsByTagName("tr");
 
+  // Recorrer todas las filas de la tabla (excepto la primera que es el encabezado)
+  for (let i = 0; i < filas.length; i++) {
+    const fila = filas[i];
+    const celdas = fila.getElementsByTagName("td");
+    let mostrarFila = true;
 
+    // Obtener el valor de la celda que contiene el estado
+    const celda = celdas[4];
+    const enlace = celda.querySelector("a");
+    console.log(enlace.textContent);
+    if (enlace) {
+      const valorCelda = enlace.textContent || celda.innerText;
+      if (valorSeleccionado !== "todos" && valorCelda !== valorSeleccionado) {
+        mostrarFila = false;
+      }
+    }
 
+    if (mostrarFila) {
+      fila.style.display = "";
+    } else {
+      fila.style.display = "none";
+    }
+  }
+}
+
+// Agregar un evento 'change' al select para detectar cambios en la selección
+const filtroSelect = document.getElementById("filtroSelect");
+filtroSelect.addEventListener("change", filtrarTablaEstado);
+
+function mostrarDetalles(event) {
+  event.preventDefault(); // Evita que el enlace se comporte como un hipervínculo
+
+  // Obtiene la fila (tr) padre del enlace clicado
+  const fila = event.target.closest("tr");
+
+  // Obtén los datos relevantes que deseas mostrar (por ejemplo, el ID y el Nombre)
+  const id = fila.querySelector("td:nth-child(7)").textContent;
+  const cliente = fila.querySelector("td:nth-child(1)").textContent;
+  var idFicha = { ficha: id, cliente: cliente };
+  console.log(idFicha);
+
+  fetch("reporteAlquiler/FichaDisfraces.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(idFicha),
+  })
+    .then((response) => response.text())
+    .then((data) => {
+      data = data.substring(1);
+      // Imprimir la respuesta del servidor(servidor retorna ID UNICO )
+      if (data == "error") {
+        Swal.fire({
+          icon: "error",
+          title: "hubo un error en la consulta",
+          text: "intente nuevamente",
+        });
+      } else {
+        console.log(JSON.parse(data));
+        document.getElementById("myModal").style.display = "block";
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}
+
+//EVENTOS PARA EL MODAL
+document.getElementsByClassName("close")[0].addEventListener("click", () => {
+  document.getElementById("myModal").style.display = "none";
+});
