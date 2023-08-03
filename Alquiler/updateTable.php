@@ -19,7 +19,7 @@ $sql = "INSERT INTO Ficha(PK_Ficha, Fich_FechaEntrega, Fich_FechaDevolucion, Fic
 if ($conex->query($sql) === TRUE) {
     echo "Inserción exitosa de Ficha";
 } else {
-    echo "Error en la inserción de Ficha: " . $conn->error;
+    echo "Error en la inserción de Ficha: " . $conex->error; //1
 }
 // // crear fichaDetalle 
 $cantidadArray = count($jsonArray);
@@ -29,9 +29,9 @@ for ($i = 0; $i < $cantidadArray; $i++) {
     $cantDisfraz = $jsonArray[$i]['cantidad'];
     $sql = "INSERT INTO FichaDetalle (PK_FichaDetalle, FK_Ficha_FichaDetalle, FK_DisfrazTalla_FichaDetalle, Fdet_CantidadCompra) VALUES ('$idFichaDetalle','$idFicha','$idDisfraz','$cantDisfraz')";
     if ($conex->query($sql) === TRUE) {
-        echo "Inserción exitosa de Ficha";
+        echo "Inserción exitosa de FichaDetalle";
     } else {
-        echo "Error en la inserción de Ficha: " . $conn->error;
+        echo "Error en la inserción de FichaDetalle: " . $conex->error;
     }
     //actualizar cantidad de unidades
     $cantidadActual = intval($jsonArray[$i]['cantidadTotal']);
@@ -39,11 +39,11 @@ for ($i = 0; $i < $cantidadArray; $i++) {
 
     $sql = "UPDATE DisfrazTalla SET Dtal_Cantidad = '$cantidadUpdate' WHERE PK_DisfrazTalla = '$idDisfraz'";
     if ($conex->query($sql) === TRUE) {
-        echo "Inserción exitosa de Ficha";
+        echo "Actualizacion Correcta";
     } else {
-        echo "Error en la inserción de Ficha: " . $conn->error;
+        echo "Actualizacion Incorrecta: " . $conex->error;
     }
-
+//1,bien,2,bien,2,bien
 }
 
 

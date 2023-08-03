@@ -54,11 +54,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     /////DISFRAZ PRECIO
     $PrecioT = uniqid();
+    date_default_timezone_set('America/Lima');
     $fechaHoy = date("Y-m-d");
     $fechaFinal = "NULL";
   
 
-    $queryPrecios = "INSERT INTO Disfrazprecios ( PK_DisfrazPrecios, FK_Disfraz_DisfrazPrecios, Dpre_Precio, Dpre_FechaInicio , Dpre_FechaFinal ) VALUES ('$PrecioT', '$disfrazID', '$precioDisfraz', '$fechaHoy' ,'$fechaFinal')";
+    $queryPrecios = "INSERT INTO DisfrazPrecios ( PK_DisfrazPrecios, FK_Disfraz_DisfrazPrecios, Dpre_Precio, Dpre_FechaInicio , Dpre_FechaFinal ) VALUES ('$PrecioT', '$disfrazID', '$precioDisfraz', '$fechaHoy' ,'$fechaFinal')";
     $conex->query($queryPrecios);
     ////////////
 

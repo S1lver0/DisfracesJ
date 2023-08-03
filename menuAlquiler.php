@@ -69,6 +69,92 @@
                 outline: none;
                 box-shadow: inset;
               }
+
+              .color-letra {
+                color: rgb(108, 52, 131);
+                font-weight: bold;
+                font-size: 25px;
+              }
+
+              .logotipo {
+                display: flex;
+                width: 15%;
+                height: 15%;
+              }
+
+              #calcular-dias,
+              #agregar-monto {
+                color: white;
+                background-color: rgb(52, 152, 219);
+                border: none;
+              }
+
+              .modal {
+                display: none;
+                position: fixed;
+                z-index: 1;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: rgba(0, 0, 0, 0.5);
+
+              }
+
+              .modal-background {
+                display: none;
+                position: fixed;
+                z-index: 0;
+                /* Asegurarse de que la capa de fondo esté detrás del modal */
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                background-color: transparent;
+                /* Fondo transparente para que no capture eventos */
+              }
+
+
+              .modal-content {
+                background-color: #fefefe;
+                margin: 15% auto;
+                padding: 20px;
+                border: 1px solid #888;
+                width: 80%;
+                max-width: 600px;
+
+
+              }
+
+              .desarrollo {
+
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+              }
+
+              .modal-background.active {
+                display: block;
+              }
+
+              .close,
+              .close-1 {
+                color: #aaa;
+                float: right;
+                font-size: 28px;
+                font-weight: bold;
+              }
+
+              .close:hover,
+              .close:focus,
+              .close-1:hover,
+              .close-1:focus {
+                color: black;
+                text-decoration: none;
+                cursor: pointer;
+              }
             </style>
 
             <select id="filtroSelect" class="form-control form-control-lg mb-3 custom-select"
@@ -158,6 +244,49 @@
         </table>
         <br>
         <p><strong>PRECIO TOTAL :</strong> <span id="precioTotal"></span></p>
+      </div>
+    </div>
+  </div>
+  <!-- Primer Modal-->
+  <div id="myModale" class="modal">
+    <div class="modal-content">
+      <span class="closee">&times;</span>
+      <div class="desarrollo">
+        <img class="logotipo" src="13.JPG" alt="">
+        <br>
+        <p class="color-letra">Añadir Días</p>
+        <div>
+          <input class="form-control" type="number" min="0">
+          <br>
+          <button id="calcular-dias">Calcular</button>
+        </div>
+        <p class="color-letra">Precio Adicional</p>
+        <div>
+          <input class="form-control" type="number" min="0">
+          <br>
+          <button id="agregar-monto">Agregar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Segundo Modal-->
+  <div id="myModale-1" class="modal">
+    <div class="modal-content">
+      <span class="closee-1">&times;</span>
+      <div class="desarrollo">
+        <img class="logotipo" src="13.JPG" alt="">
+        <br>
+        <p class="color-letra">Cantidad de Dias que se paso</p>
+        <div>
+          <input class="form-control" type="number" min="0">
+        </div>
+        <p class="color-letra">Precio Adicional</p>
+        <div>
+          <input class="form-control" type="number" min="0">
+          <br>
+          <button id="agregar-monto">Confirmar</button>
+          <button id="agregar-monto">No Cambiar</button>
+        </div>
       </div>
     </div>
   </div>
@@ -267,7 +396,8 @@
   .tables tr:nth-child(odd) {
     background-color: #f2e1ec;
   }
-  .modal-header{
+
+  .modal-header {
     display: flex;
     justify-content: center;
   }

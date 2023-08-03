@@ -126,6 +126,7 @@
                 dias: dates,
                 precio: tot
             };
+            console.log(data);
 
             // URL del archivo PHP al que quieres enviar los datos
             const url = "Alquiler/updateTable.php";

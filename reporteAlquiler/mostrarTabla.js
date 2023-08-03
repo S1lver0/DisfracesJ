@@ -51,9 +51,9 @@ fetch("reporteAlquiler/obtenerLista.php", {
                     ? "btn btn-success btn-sm glyphicon glyphicon-ok-circle"
                     : "btn btn-danger btn-sm glyphicon glyphicon-remove-circle"
                 }">${estado == "Activo" ? "Activo" : "Vencido"}</a></td>
-                <td><a class="btn btn-success btn-sm boton-comprar glyphicon glyphicon-plus"></a>
+                <td>
                 <a class="detalles btn btn-primary btn-sm boton-comprar glyphicon glyphicon-eye-open"></a>
-                <a class="btn btn-danger btn-sm boton-comprar glyphicon glyphicon-trash"></a></td>
+                <a class="eliminar btn btn-danger btn-sm boton-comprar glyphicon glyphicon-trash"></a></td>
                 <td style="display:none">${data[clave].PK_Ficha}</td>
             </tr>
             `;
@@ -67,6 +67,12 @@ fetch("reporteAlquiler/obtenerLista.php", {
       // Agrega un evento clic a cada enlace
       enlacesDetalles.forEach((enlace) => {
         enlace.addEventListener("click", mostrarDetalles);
+      });
+      //evento de añadir dias
+      const enlacesDias = document.querySelectorAll(".eliminar");
+      // Agrega un evento clic a cada enlace
+      enlacesDias.forEach((enlace) => {
+        enlace.addEventListener("click", eliminar);
       });
     }
   })
@@ -210,7 +216,15 @@ function mostrarDetalles(event) {
       <td>${producto.Disf_Nombre}</td>
       <td>${producto.Fdet_CantidadCompra}</td>
       <td>${producto.Disf_Precio}</td>
-      <td>${producto.FK_Talla_DIsfrazTalla == "1" ? "S" :producto.FK_Talla_DIsfrazTalla == "2" ? "M" :producto.FK_Talla_DIsfrazTalla == "3" ? "L" : " " }</td>
+      <td>${
+        producto.FK_Talla_DIsfrazTalla == "1"
+          ? "S"
+          : producto.FK_Talla_DIsfrazTalla == "2"
+          ? "M"
+          : producto.FK_Talla_DIsfrazTalla == "3"
+          ? "L"
+          : " "
+      }</td>
     </tr>
   `;
         });
@@ -226,3 +240,33 @@ function mostrarDetalles(event) {
 document.getElementsByClassName("close")[0].addEventListener("click", () => {
   document.getElementById("myModal").style.display = "none";
 });
+
+//EVENTOS PARA EL MODAL
+document.getElementsByClassName("closee")[0].addEventListener("click", () => {
+  document.getElementById("myModale").style.display = "none";
+});
+
+//variable global
+var CantidadUnitaria = 0;
+
+function eliminar(event) {
+  const fila = event.target.closest("tr");
+  const id = fila.querySelector("td:nth-child(7)").textContent;
+  var idFicha = { ficha: id };
+  fetch("reporteAlquiler/updatearFicha.php", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(idFicha),
+  })
+    .then((response) => response.text())
+    .then((data) => {
+      console.log(data);
+      alert("Se borro correctamente");
+      location.reload();
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
+}

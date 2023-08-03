@@ -43,8 +43,8 @@ if (isset($_GET['id'])) {
 
 
 
-
-    $fechaM = date("Y-m-d", strtotime("+1 day"));
+    date_default_timezone_set('America/Lima');
+    $fechaM = date("Y-m-d");
 
 
     if ($precioMaximo != $precioDisfraz) {
